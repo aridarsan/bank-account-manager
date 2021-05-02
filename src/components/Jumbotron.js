@@ -3,7 +3,7 @@ import { Container } from 'reactstrap';
 const Jumbotron = () => {
   return (
     <>
-      <div className='pt-2 pb-2' style={{ backgroundColor: '#0099ff' }}>
+      <div className='pt-2 pb-2' style={{ backgroundColor: '#a2d9ff' }}>
         <Container style={{ marginTop: '6%' }}>
           <div
             style={{
@@ -26,7 +26,7 @@ const Jumbotron = () => {
       <div style={{ height: '4rem', marginTop: '-0.5rem' }}>
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'>
           <path
-            fill='#0099ff'
+            fill='#a2d9ff'
             fill-opacity='1'
             d='M0,96L80,112C160,128,320,160,480,144C640,128,800,64,960,42.7C1120,21,1280,43,1360,53.3L1440,64L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z'
           ></path>

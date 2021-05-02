@@ -72,7 +72,7 @@ const NavBar = (props) => {
                     style={{height:"2rem"}}
                   >
                     <p>
-                      <i class='fas fa-user-alt mr-2'></i>Profile
+                      <i className='fas fa-user-alt mr-2'></i>Profile
                     </p>
                   </NavLink>
                 </DropdownItem>
@@ -85,7 +85,7 @@ const NavBar = (props) => {
                     style={{height:"2rem"}}
                   >
                     <p>
-                      <i class='fas fa-sign-out-alt mr-2'></i>Logout
+                      <i className='fas fa-sign-out-alt mr-2'></i>Logout
                     </p>
                   </NavLink>
                 </DropdownItem>
