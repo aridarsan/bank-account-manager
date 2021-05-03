@@ -73,7 +73,7 @@ const AccountDetail = () => {
       {/* Navbar */}
       <NavBar />
       <div className='pt-2 pb-2 mt-7'>
-        <Container >
+        <Container style={{marginTop: "6%"}}>
           {account.length !== 0 ? (
             <Row>
               {/* Split Row */}
@@ -403,7 +403,7 @@ const AccountDetail = () => {
                 textAlign: 'center',
               }}
             >
-              <Spinner color='primary' lg />
+              <Spinner color='primary' />
               <h5>Loading....</h5>
               <Button color='primary' onClick={getList}>
                 Retry
