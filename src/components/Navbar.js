@@ -21,7 +21,7 @@ const NavBar = (props) => {
     <Navbar
       className='fixed-top'
       expand='md'
-      style={{ backgroundColor: '#f2f2f2', height: '70px', boxShadow: '-1px 37px 85px -47px rgba(33,33,33,1)' }}
+      style={{ backgroundColor: 'lightblue', height: '70px', boxShadow: '-1px 37px 85px -47px rgba(33,33,33,1)' }}
     >
       <Container>
         <Nav style={{ alignItems: 'center' }}>

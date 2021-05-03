@@ -73,7 +73,7 @@ const AccountDetail = () => {
       {/* Navbar */}
       <NavBar />
       <div className='pt-2 pb-2 mt-7'>
-        <Container style={{ marginTop: '4%' }}>
+        <Container >
           {account.length !== 0 ? (
             <Row>
               {/* Split Row */}
