@@ -79,7 +79,7 @@ const AccountList = () => {
 
   return (
     <>
-      <Container className='mt-2 mb-2'>
+      <Container className='mb-2'>
         <Row
           className='mb-4'
           style={{ alignContent: 'center', alignItems: 'center' }}
@@ -116,7 +116,7 @@ const AccountList = () => {
                           : list.name === 'BNI'
                           ? '#f6730b'
                           : list.name === 'BTN'
-                          ? '#a10e0e'
+                          ? 'grey'
                           : '#1bb827',
                       color: 'white',
                       boxShadow: '-1px 37px 85px -47px rgba(33,33,33,1)',
