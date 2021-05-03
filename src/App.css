@@ -30,3 +30,17 @@ body{
   background-color: lightgray;
 }
 
+.account:hover{
+  text-decoration: none !important;
+  color: black !important;
+  opacity: 0.8 !important;
+  background-color: burlywood !important;
+}
+
+.card:hover{
+  opacity: 0.8;
+  box-shadow: none !important;
+  color: black !important;
+  cursor: pointer;
+}
+

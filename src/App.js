@@ -12,7 +12,7 @@ function App() {
           {/* <Contact /> */}
         </Route>
 
-        <Route path="/detail">
+        <Route path="/detail/:id">
           <AccountDetail />
         </Route>
 

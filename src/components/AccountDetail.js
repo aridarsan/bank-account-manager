@@ -1,43 +1,110 @@
-import { Button, Card, CardBody, Col, Container, Row } from 'reactstrap';
+/* eslint-disable react-hooks/exhaustive-deps */
+import {
+  Button,
+  Card,
+  CardBody,
+  Col,
+  Container,
+  Row,
+  Spinner,
+} from 'reactstrap';
 import NavBar from './Navbar';
 import facebook from '../image/facebook.svg';
 import Footer from './Footer';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import swal from 'sweetalert';
+import { useParams } from 'react-router';
+import moment from 'moment';
 
-const CardList = [
-  {
-    number: '1223 2424 1241',
-    name: 'BRI',
-    balance: '$ 2,000',
-    transactiondate: '21 - 04 - 2021',
-  },
-];
+// const Cardaccount = [
+//   {
+//     number: '1223 2424 1241',
+//     name: 'BRI',
+//     balance: '$ 2,000',
+//     transactiondate: '21 - 04 - 2021',
+//   },
+// ];
 
-const History = [
-  {
-    to: 'Spotify',
-    category: 'Entertainment',
-    amount: '-$20',
-    date: 'Yesterday',
-    profil: facebook,
-    type: 'send',
-  },
-  {
-    to: 'Jacob Brian',
-    category: 'Gift',
-    amount: '$50',
-    date: 'Today, 4:30 PM',
-    profil: facebook,
-    type: 'received',
-  },
-];
+// const History = [
+//   {
+//     to: 'Spotify',
+//     category: 'Entertainment',
+//     amount: '-$20',
+//     date: 'Yesterday',
+//     profil: facebook,
+//     type: 'send',
+//   },
+//   {
+//     to: 'Jacob Brian',
+//     category: 'Gift',
+//     amount: '$50',
+//     date: 'Today, 4:30 PM',
+//     profil: facebook,
+//     type: 'received',
+//   },
+// ];
 
 const AccountDetail = () => {
+  const [account, setAccount] = useState([]);
+  const [history, setHistory] = useState([]);
+  const params = useParams();
+  // console.log(params.id)
+  const url = 'https://5fad41ff2ec98b00160481c3.mockapi.io';
+
+  const getList = () => {
+    axios
+      .get(url + '/detail/' + params.id)
+      .then((res) => {
+        setAccount(res.data);
+        // console.log(account);
+      })
+      .catch((err) => {
+        console.log(err);
+        swal({
+          icon: 'warning',
+          title: 'Failed to load data',
+          text: 'Please wait',
+          type: 'warning',
+          buttons: false,
+          timer: 3000,
+        });
+      });
+  };
+
+  const getHistory = () => {
+    axios
+      .get(url + '/detail/' + params.id + '/history')
+      .then((res) => {
+        setHistory(res.data);
+        console.log(history);
+      })
+      .catch((err) => {
+        console.log(err);
+        swal({
+          icon: 'warning',
+          title: 'Failed to load data',
+          text: 'Please wait',
+          type: 'warning',
+          buttons: false,
+          timer: 3000,
+        });
+      });
+  };
+
+  useEffect(() => {
+    getList();
+    getHistory();
+  }, []);
+
   return (
     <>
       {/* Navbar */}
       <NavBar />
       <div className='pt-2 pb-2 mt-7'>
         <Container style={{ marginTop: '7%' }}>
+          {account.length !== 0 ? (
+
           <Row>
             {/* Split Row */}
             <Col lg='6' md='12' sm='12'>
@@ -47,87 +114,85 @@ const AccountDetail = () => {
                 </Col>
               </Row>
               <Row>
-                {CardList.map((list, index) => (
-                  <>
-                    <Col lg='12' md='6' sm='12' className='mb-4' key={index}>
-                      <Card
-                        style={{
-                          backgroundColor:
-                            list.name === 'BRI'
-                              ? '#5163f6'
-                              : list.name === 'BNI'
-                              ? '#f6730b'
-                              : list.name === 'BTN'
-                              ? '#a10e0e'
-                              : '#1bb827',
-                          color: 'white',
-                          boxShadow: '-1px 37px 85px -47px rgba(33,33,33,1)',
-                        }}
-                      >
-                        <CardBody>
-                          <Row className='mb-2'>
-                            <Col>
-                              <p className='mb-1'>Account Number</p>
-                              <h5>{list.number}</h5>
-                            </Col>
-                            <Col xs='4' sm='6' md='4' lg='4'>
-                              <p className='mb-1'>Bank Name</p>
-                              <h5>{list.name}</h5>
-                            </Col>
-                          </Row>
-                          <Row className='mb-2'>
-                            <Col>
-                              <p className='mb-1'>Balance</p>
-                              <h2 className='display-4'>{list.balance}</h2>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col>
-                              <p className='mb-0'>
-                                Last Transaction : {list.transactiondate}
-                              </p>
-                            </Col>
-                            <Col lg='4' md='6' xs='4'>
-                              <h4>VISA</h4>
-                            </Col>
-                          </Row>
-                        </CardBody>
-                      </Card>
-                      <Row className='mt-4'>
-                        <Col>
-                          <Button className='mr-2' color='danger'>
-                            <i
-                              className='fa fa-arrow-up  mr-2'
-                              aria-hidden='true'
-                            ></i>
-                            Send
-                          </Button>
-                          <Button color='success' className='mr-2'>
-                            <i
-                              className='fa fa-arrow-down mr-2'
-                              aria-hidden='true'
-                            ></i>
-                            Request
-                          </Button>
-                          <Button color='warning' className='mr-2'>
-                            <i
-                              className='fa fa-credit-card mr-2'
-                              aria-hidden='true'
-                            ></i>
-                            Top Up
-                          </Button>
-                          <Button color='info' className='mr-2'>
-                            <i
-                              className='fa fa-file mr-2'
-                              aria-hidden='true'
-                            ></i>
-                            Bill
-                          </Button>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </>
-                ))}
+                <>
+                  <Col lg='12' md='6' sm='12' className='mb-4'>
+                    <Card
+                      style={{
+                        backgroundColor:
+                          account.name === 'BRI'
+                            ? '#5163f6'
+                            : account.name === 'BNI'
+                            ? '#f6730b'
+                            : account.name === 'BTN'
+                            ? '#a10e0e'
+                            : '#1bb827',
+                        color: 'white',
+                        boxShadow: '-1px 37px 85px -47px rgba(33,33,33,1)',
+                      }}
+                    >
+                      <CardBody>
+                        <Row className='mb-2'>
+                          <Col>
+                            <p className='mb-1'>Account Number</p>
+                            <h5>{account.number}</h5>
+                          </Col>
+                          <Col xs='4' sm='6' md='4' lg='4'>
+                            <p className='mb-1'>Bank Name</p>
+                            <h5>{account.name}</h5>
+                          </Col>
+                        </Row>
+                        <Row className='mb-2'>
+                          <Col>
+                            <p className='mb-1'>Balance</p>
+                            <h2 className='display-4'>$ {account.balance}</h2>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <p className='mb-0'>
+                              Last Transaction :{' '}
+                              {moment(account.transaction).format(
+                                'D MMM YYYY, k:mm'
+                              )}
+                            </p>
+                          </Col>
+                          <Col lg='4' md='6' xs='4'>
+                            <h4>VISA</h4>
+                          </Col>
+                        </Row>
+                      </CardBody>
+                    </Card>
+                    <Row className='mt-4'>
+                      <Col>
+                        <Button className='mr-2' color='danger'>
+                          <i
+                            className='fa fa-arrow-up  mr-2'
+                            aria-hidden='true'
+                          ></i>
+                          Send
+                        </Button>
+                        <Button color='success' className='mr-2'>
+                          <i
+                            className='fa fa-arrow-down mr-2'
+                            aria-hidden='true'
+                          ></i>
+                          Request
+                        </Button>
+                        <Button color='warning' className='mr-2'>
+                          <i
+                            className='fa fa-credit-card mr-2'
+                            aria-hidden='true'
+                          ></i>
+                          Top Up
+                        </Button>
+                        <Button color='info' className='mr-2'>
+                          <i className='fa fa-file mr-2' aria-hidden='true'></i>
+                          Bill
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Col>
+                </>
               </Row>
 
               <Row>
@@ -138,7 +203,7 @@ const AccountDetail = () => {
                     </Col>
                   </Row>
 
-                  <Row className="mb-4">
+                  <Row className='mb-4'>
                     <Col lg='2' md='2' sm='2' xs='2'>
                       <img
                         src={facebook}
@@ -183,7 +248,7 @@ const AccountDetail = () => {
                     </Col>
                   </Row>
 
-                  <Row className="mb-4">
+                  <Row className='mb-4'>
                     <Col>
                       <Card
                         style={{
@@ -208,7 +273,7 @@ const AccountDetail = () => {
                                       className='fa fa-arrow-circle-up'
                                       aria-hidden='true'
                                     ></i>{' '}
-                                    $400{' '}
+                                    ${account.send}
                                   </h2>
                                 </Col>
                               </Row>
@@ -230,7 +295,7 @@ const AccountDetail = () => {
                                       className='fa fa-arrow-circle-down'
                                       aria-hidden='true'
                                     ></i>{' '}
-                                    $800
+                                    $ {account.receive}
                                   </h2>
                                 </Col>
                               </Row>
@@ -251,70 +316,115 @@ const AccountDetail = () => {
                 </Col>
               </Row>
 
-              {History.map((transaction, index) => (
-                <Row key={index}>
-                  <Col lg='12' md='12'>
-                    <Card
-                      className='mb-2'
-                      style={{
-                        boxShadow: '-1px 37px 85px -47px rgba(33,33,33,1)',
-                      }}
-                    >
-                      <Row className='p-3'>
-                        <Col lg='2' md='3' sm='2' xs='2'>
-                          <img
-                            src={transaction.profil}
-                            alt='img transaction'
-                            style={{
-                              height: '70px',
-                              border: '1px solid grey',
-                              borderRadius: '10px',
-                            }}
-                            className='img-transaction'
-                          />
-                        </Col>
+              {history.length !== 0 ? (
+                history.map((transaction, index) => (
+                  <Row key={index}>
+                    <Col lg='12' md='12'>
+                      <Card
+                        className='mb-2'
+                        style={{
+                          boxShadow: '-1px 37px 85px -47px rgba(33,33,33,1)',
+                        }}
+                      >
+                        <Row className='p-3'>
+                          <Col lg='2' md='3' sm='2' xs='2'>
+                            <img
+                              src={transaction.image}
+                              alt='imager'
+                              style={{
+                                height: '70px',
+                                border: '1px solid grey',
+                                borderRadius: '10px',
+                              }}
+                              className='img-transaction'
+                            />
+                          </Col>
 
-                        <Col>
-                          <Row>
-                            <Col lg='5' md='4' sm='3' xs='6'>
-                              <CardBody className='p-0'>
-                                <h5 className='mb-3'>
-                                  <strong>{transaction.to}</strong>
-                                </h5>
-                                <p className='mb-0'>{transaction.category}</p>
-                              </CardBody>
-                            </Col>
+                          <Col>
+                            <Row>
+                              <Col lg='6' md='4' sm='3' xs='6'>
+                                <CardBody className='p-0'>
+                                  <h5 className='mb-3'>
+                                    <strong>{transaction.to}</strong>
+                                  </h5>
+                                  <p className='mb-0'>{transaction.category}</p>
+                                </CardBody>
+                              </Col>
 
-                            <Col
-                              lg='7'
-                              md='4'
-                              sm='5'
-                              xs='6'
-                              className='text-right'
-                            >
-                              <h5
-                                className='mb-3'
-                                style={{
-                                  color:
-                                    transaction.type === 'send'
-                                      ? 'red'
-                                      : 'green',
-                                }}
+                              <Col
+                                lg='6'
+                                md='4'
+                                sm='5'
+                                xs='6'
+                                className='text-right'
                               >
-                                <strong>{transaction.amount}</strong>
-                              </h5>
-                              <p className='mb-0'>{transaction.date}</p>
-                            </Col>
-                          </Row>
-                        </Col>
-                      </Row>
-                    </Card>
+                                <h5
+                                  className='mb-3'
+                                  style={{
+                                    color:
+                                      transaction.type === 'debit'
+                                        ? 'red'
+                                        : 'green',
+                                  }}
+                                >
+                                  <strong>
+                                    {transaction.type === 'debit'
+                                      ? '-' + transaction.amount
+                                      : '+$' + transaction.amount}
+                                  </strong>
+                                </h5>
+                                <p className='mb-0'>
+                                  {moment(transaction.date).format(
+                                    'D MMM YYYY, k:mm'
+                                  )}
+                                </p>
+                              </Col>
+                            </Row>
+                          </Col>
+                        </Row>
+                      </Card>
+                    </Col>
+                  </Row>
+                ))
+              ) : (
+                
+                <Row>
+                  <Col
+                    lg='12'
+                    className='m-auto mb-5 text-center'
+                    style={{
+                      alignContent: 'center',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                    }}
+                  >
+                    <h5>Have'nt transaction history</h5>
+                    <Button color='primary' onClick={getList}>
+                      Transaction now
+                    </Button>
                   </Col>
                 </Row>
-              ))}
-
+              )}
             </Col>
           </Row>
+          
+          ) : (
+            <Col
+              lg='12'
+              className='m-auto mb-5 text-center'
+              style={{
+                alignContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center',
+              }}
+            >
+              <Spinner color="primary" lg />
+              <h5>Loading....</h5>
+              <Button color='primary' onClick={getList}>
+                Retry
+              </Button>
+            </Col>
+            )}
         </Container>
       </div>
       <Footer />
