@@ -14,6 +14,7 @@ import {
 } from 'reactstrap';
 import swal from 'sweetalert';
 import '../App.css';
+import AddAccount from './AddAccount';
 
 const AccountList = () => {
 
@@ -62,12 +63,13 @@ const AccountList = () => {
               </h4>
             </Col>
             <Col className='text-right'>
-              <Button size='sm' color='primary'>
+              {/* <Button size='sm' color='primary'>
                 <h4 className='mb-0'>
                   {' '}
                   <i className='fa fa-plus' aria-hidden='true'></i> Add
                 </h4>
-              </Button>
+              </Button> */}
+              <AddAccount/>
             </Col>
           </Row>
           <Row>
