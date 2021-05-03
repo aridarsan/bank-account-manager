@@ -356,7 +356,7 @@ const AccountDetail = () => {
                                   >
                                     <strong>
                                       {transaction.type === 'debit'
-                                        ? '-' + transaction.amount
+                                        ? '-$' + transaction.amount
                                         : '+$' + transaction.amount}
                                     </strong>
                                   </h5>

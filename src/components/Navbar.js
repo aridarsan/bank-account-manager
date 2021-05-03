@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import avatardef from '../image/logo512.png';
 import PropTypes from "prop-types";
 import {
   Container,
@@ -13,7 +12,7 @@ import {
   NavbarBrand
 } from 'reactstrap';
 
-const NavBar = (props) => {
+const NavBar = () => {
   const [dropdownOpen, setOpen] = useState(false);
   const toggle = () => setOpen(!dropdownOpen);
 
@@ -53,7 +52,7 @@ const NavBar = (props) => {
                 className='ml-auto'
               >
                 <img
-                  src={avatardef}
+                  src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/d7/d77a676e25c4e2e491c15ed49b6f097e957dd89b_full.jpg"
                   alt='pp'
                   className='avatar'
                   style={{

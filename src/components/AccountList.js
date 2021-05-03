@@ -9,50 +9,14 @@ import {
   CardBody,
   Col,
   Container,
-  Input,
-  Label,
   Row,
   Spinner,
 } from 'reactstrap';
 import swal from 'sweetalert';
 import '../App.css';
 
-// const CardList = [
-//   {
-//     id : 1,
-//     number: '1223 2424 1241',
-//     name: 'BRI',
-//     balance: '$ 2000',
-//     transaction: '21 - 04 - 2021',
-//   },
-//   {
-//     id : 2,
-//     number: '1223 2424 1241',
-//     name: 'BNI',
-//     balance: '$ 2000',
-//     transaction: '21 - 04 - 2021',
-//   },
-//   {
-//     id : 3,
-//     number: '1223 2424 1241',
-//     name: 'Mandiri',
-//     balance: '$ 2000',
-//     transaction: '21 - 04 - 2021',
-//   },
-//   {
-//     id : 4,
-//     number: '1223 2424 1241',
-//     name: 'BTN',
-//     balance: '$ 2000',
-//     transaction: '21 - 04 - 2021',
-//   },
-// ];
-
 const AccountList = () => {
-  const [edit, setEdit] = useState(false);
-  console.log(edit);
 
-  const CardList = () => {
     const history = useHistory();
     const [list, setList] = useState([]);
     const url = 'https://5fad41ff2ec98b00160481c3.mockapi.io';
@@ -98,10 +62,10 @@ const AccountList = () => {
               </h4>
             </Col>
             <Col className='text-right'>
-              <Button size='sm' color='primary' onClick={() => setEdit(true)}>
+              <Button size='sm' color='primary'>
                 <h4 className='mb-0'>
                   {' '}
-                  <i className='fa fa-plus' aria-hidden='true'></i> Add Card
+                  <i className='fa fa-plus' aria-hidden='true'></i> Add
                 </h4>
               </Button>
             </Col>
@@ -189,24 +153,5 @@ const AccountList = () => {
     );
   };
 
-  const AddAccount = () => {
-    return (
-      <>
-        <Container>
-          <Row>
-            <Col>
-              <h4>Add new Account</h4>
-              <Label id='input'>Number</Label>
-              <Input type='number' />
-              <Button onClick={() => setEdit(false)}>Save</Button>
-            </Col>
-          </Row>
-        </Container>
-      </>
-    );
-  };
-
-  return edit ? AddAccount() : CardList();
-};
 
 export default AccountList;
